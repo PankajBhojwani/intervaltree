@@ -61,7 +61,7 @@ public:
     IntervalTree()
         : left(nullptr)
         , right(nullptr)
-        , center(0)
+        , center(Scalar{})
     {}
 
     ~IntervalTree() = default;
@@ -93,8 +93,8 @@ public:
             std::size_t depth = 16,
             std::size_t minbucket = 64,
             std::size_t maxbucket = 512, 
-            Scalar leftextent = 0,
-            Scalar rightextent = 0)
+            Scalar leftextent = {},
+            Scalar rightextent = {})
       : left(nullptr)
       , right(nullptr)
     {
@@ -106,7 +106,7 @@ public:
         if (!ivals.empty()) {
             center = (minmaxStart.first->start + minmaxStop.second->stop) / 2;
         }
-        if (leftextent == 0 && rightextent == 0) {
+        if (leftextent == Scalar{} && rightextent == Scalar{}) {
             // sort intervals by start
             std::sort(ivals.begin(), ivals.end(), IntervalStartCmp());
         } else {
@@ -118,10 +118,10 @@ public:
             assert(is_valid().first);
             return;
         } else {
-            Scalar leftp = 0;
-            Scalar rightp = 0;
+            Scalar leftp = Scalar{};
+            Scalar rightp = Scalar{};
 
-            if (leftextent || rightextent) {
+            if (leftextent != Scalar{} || rightextent != Scalar{}) {
                 leftp = leftextent;
                 rightp = rightextent;
             } else {
