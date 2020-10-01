@@ -61,7 +61,7 @@ public:
     IntervalTree()
         : left(nullptr)
         , right(nullptr)
-        , center(Scalar{})
+        , center()
     {}
 
     ~IntervalTree() = default;
