@@ -21,6 +21,24 @@ public:
     , stop(std::max(s, e))
     , value(v) 
     {}
+
+    Interval()
+    {
+    }
+
+    constexpr bool operator==(const Interval& other) const noexcept
+    {
+        return start == other.start &&
+            stop == other.stop &&
+            value == other.value;
+    }
+
+    constexpr bool operator!=(const Interval& other) const noexcept
+    {
+        return start != other.start ||
+            stop != other.stop ||
+            value != other.value;
+    }
 };
 
 template <class Scalar, typename Value>
